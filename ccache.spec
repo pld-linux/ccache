@@ -7,6 +7,7 @@ Release:	1
 License:	GPL
 Group:		Development/Tools
 Source0:	http://ccache.samba.org/ftp/ccache/%{name}-%{version}.tar.gz
+# Source0-md5:	3b98afe5e966ccd37f4d2b102d6ac8ac
 URL:		http://ccache.samba.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
