@@ -1,7 +1,7 @@
 Summary:	Compiler cache
 Summary(pl):	Przyspieszacz kompilowania 
 Name:		ccache
-Version:	1.8
+Version:	1.9
 Release:	1
 License:	GPL
 Group:		Development/Tools
@@ -24,7 +24,7 @@ do kompilacji wystarczy zawarto¶æ cache. Daje to zazwyczaj
 przyspieszenie kompilacji 5 do 10 razy.
 
 %prep
-%setup -q -n ccache-1.8
+%setup -q
 
 %build
 aclocal
