@@ -36,7 +36,7 @@ pré-processamento para compiladores C/C++ utilizando-se do parâmetro
 %setup -q
 
 %build
-aclocal
+%{__aclocal}
 %{__autoconf}
 cp -f /usr/share/automake/config.* .
 %configure
