@@ -8,6 +8,7 @@ License:	GPL
 Group:		Development/Tools
 Source0:	http://ccache.samba.org/ftp/ccache/%{name}-%{version}.tar.gz
 BuildRoot:      %{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
 %description
 ccache is a compiler cache. It acts as a caching pre-processor to
 C/C++ compilers, using the -E compiler switch and a hash to detect
@@ -15,6 +16,8 @@ when a compilation can be satisfied from cache. This often results in
 a 5 to 10 times speedup in common compilations.
 
 %description -l pl 
+ccache narzêdziem które przyspiesza proces kompilacji programów napisanych 
+w C/C++ 
 
 %prep
 %setup -q -n ccache-1.8
