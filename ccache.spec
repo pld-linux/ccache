@@ -7,6 +7,8 @@ License:	GPL
 Group:		Development/Tools
 Source0:	http://ccache.samba.org/ftp/ccache/%{name}-%{version}.tar.gz
 URL:		http://ccache.samba.org/
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRoot:      %{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -25,6 +27,9 @@ przyspieszenie kompilacji 5 do 10 razy.
 %setup -q -n ccache-1.8
 
 %build
+aclocal
+autoconf
+cp -f /usr/share/automake/config.* .
 %configure
 
 %{__make}
@@ -43,6 +48,6 @@ rm -fr $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc *.gz
 %attr(755,root,root) %{_bindir}/ccache
 %{_mandir}/man1/ccache*
-%doc *.gz
