@@ -2,12 +2,12 @@ Summary:	Compiler cache
 Summary(pl):	Przyspieszacz kompilowania
 Summary(pt_BR):	Cache para compiladores C/C++
 Name:		ccache
-Version:	2.2
+Version:	2.3
 Release:	1
 License:	GPL
 Group:		Development/Tools
 Source0:	http://ccache.samba.org/ftp/ccache/%{name}-%{version}.tar.gz
-# Source0-md5:	3b98afe5e966ccd37f4d2b102d6ac8ac
+# Source0-md5:	5e4afc0b170bf282d1813aeaf3d577d2
 URL:		http://ccache.samba.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
