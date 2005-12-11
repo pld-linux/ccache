@@ -3,7 +3,7 @@ Summary(pl):	Przyspieszacz kompilowania
 Summary(pt_BR):	Cache para compiladores C/C++
 Name:		ccache
 Version:	2.4
-Release:	1.2
+Release:	1.3
 License:	GPL
 Group:		Development/Tools
 Source0:	http://ccache.samba.org/ftp/ccache/%{name}-%{version}.tar.gz
@@ -39,6 +39,7 @@ pré-processamento para compiladores C/C++ utilizando-se do parâmetro
 Summary:	Symlinks for c++/cc/g++/gcc
 Summary(pl):	Dowi±zania symboliczne do c++/cc/g++/gcc
 Group:		Development/Tools
+Requires:	%{name} = %{version}-%{release}
 
 %description wrapper
 This package contains the softlinks to distcc for each compiler.
