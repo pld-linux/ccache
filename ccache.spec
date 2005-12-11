@@ -3,7 +3,7 @@ Summary(pl):	Przyspieszacz kompilowania
 Summary(pt_BR):	Cache para compiladores C/C++
 Name:		ccache
 Version:	2.4
-Release:	1
+Release:	1.2
 License:	GPL
 Group:		Development/Tools
 Source0:	http://ccache.samba.org/ftp/ccache/%{name}-%{version}.tar.gz
@@ -12,6 +12,8 @@ URL:		http://ccache.samba.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_libdir		%{_prefix}/%{_lib}/%{name}
 
 %description
 ccache is a compiler cache. It acts as a caching pre-processor to
@@ -33,6 +35,14 @@ pré-processamento para compiladores C/C++ utilizando-se do parâmetro
   compilações comuns pode chegar a uma escala de até 10 vezes em relação
   ao tempo normal.
 
+%package wrapper
+Summary:	Symlinks for c++/cc/g++/gcc
+Summary(pl):	Dowi±zania symboliczne do c++/cc/g++/gcc
+Group:		Development/Tools
+
+%description wrapper
+This package contains the softlinks to distcc for each compiler.
+
 %prep
 %setup -q
 
@@ -50,6 +60,13 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir},/etc/profile.d}
+for cc in cc c++ g++ gcc %{_target_cpu}-pld-linux-gcc %{_target_cpu}-pld-linux-g++; do
+	ln -s ../../bin/%{name} $RPM_BUILD_ROOT%{_libdir}/$cc
+done
+echo 'export PATH=%{_libdir}:$PATH' > \
+	$RPM_BUILD_ROOT/etc/profile.d/%{name}.sh
+
 %clean
 rm -fr $RPM_BUILD_ROOT
 
@@ -58,3 +75,9 @@ rm -fr $RPM_BUILD_ROOT
 %doc README
 %attr(755,root,root) %{_bindir}/ccache
 %{_mandir}/man1/ccache*
+
+%files wrapper
+%defattr(644,root,root,755)
+%attr(755,root,root) /etc/profile.d/%{name}.sh
+%dir %{_libdir}
+%attr(755,root,root) %{_libdir}/*
