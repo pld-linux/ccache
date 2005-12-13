@@ -42,7 +42,11 @@ Group:		Development/Tools
 Requires:	%{name} = %{version}-%{release}
 
 %description wrapper
-This package contains the softlinks to distcc for each compiler.
+This package contains the softlinks to ccache for each compiler.
+
+%description wrapper -l pl
+Ten pakiet zawiera dowi±zania symboliczne do ccache dla ka¿dego
+kompilatora.
 
 %prep
 %setup -q
