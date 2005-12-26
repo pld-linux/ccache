@@ -3,11 +3,13 @@ Summary(pl):	Przyspieszacz kompilowania
 Summary(pt_BR):	Cache para compiladores C/C++
 Name:		ccache
 Version:	2.4
-Release:	1.3
+Release:	1.4
 License:	GPL
 Group:		Development/Tools
 Source0:	http://ccache.samba.org/ftp/ccache/%{name}-%{version}.tar.gz
 # Source0-md5:	73c1ed1e767c1752dd0f548ec1e66ce7
+# http://www.freebsd.org/cgi/cvsweb.cgi/ports/devel/ccache/Makefile?rev=1.35&content-type=text/x-cvsweb-markup
+Patch0:		%{name}-nohash_size_mtime.patch
 URL:		http://ccache.samba.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -50,6 +52,7 @@ kompilatora.
 
 %prep
 %setup -q
+%patch0 -p0
 
 %build
 %{__aclocal}
@@ -62,8 +65,18 @@ cp -f /usr/share/automake/config.* .
 %install
 rm -rf $RPM_BUILD_ROOT
 
+install -d $RPM_BUILD_ROOT/etc/env.d
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+for X in CCACHE_DIR CCACHE_TEMPDIR CCACHE_LOGFILE CCACHE_PATH CCACHE_CC CCACHE_PREFIX \
+	CCACHE_DISABLE CCACHE_READONLY CCACHE_CPP2 CCACHE_NOSTATS CCACHE_NLEVELS \
+	CCACHE_HARDLINK CCACHE_RECACHE CCACHE_UMASK CCACHE_HASHDIR CCACHE_UNIFY \
+	CCACHE_EXTENSION CCACHE_NOHASH_SIZE_MTIME
+do
+	echo "#${X}=\"\"" > $RPM_BUILD_ROOT/etc/env.d/${X}
+done
 
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir},/etc/profile.d}
 for cc in cc c++ g++ gcc %{_target_cpu}-pld-linux-gcc %{_target_cpu}-pld-linux-g++; do
@@ -80,6 +93,7 @@ rm -fr $RPM_BUILD_ROOT
 %doc README
 %attr(755,root,root) %{_bindir}/ccache
 %{_mandir}/man1/ccache*
+%attr(644,root,root) %config(noreplace,missingok) %verify(not md5 size mtime) /etc/env.d/*
 
 %files wrapper
 %defattr(644,root,root,755)
