@@ -8,7 +8,6 @@ License:	GPL
 Group:		Development/Tools
 Source0:	http://ccache.samba.org/ftp/ccache/%{name}-%{version}.tar.gz
 # Source0-md5:	73c1ed1e767c1752dd0f548ec1e66ce7
-# http://www.freebsd.org/cgi/cvsweb.cgi/ports/devel/ccache/Makefile?rev=1.35&content-type=text/x-cvsweb-markup
 Patch0:		%{name}-nohash_size_mtime.patch
 URL:		http://ccache.samba.org/
 BuildRequires:	autoconf
