@@ -92,7 +92,7 @@ rm -fr $RPM_BUILD_ROOT
 %doc README
 %attr(755,root,root) %{_bindir}/ccache
 %{_mandir}/man1/ccache*
-%attr(644,root,root) %config(noreplace,missingok) %verify(not md5 size mtime) /etc/env.d/*
+%config(noreplace,missingok) %verify(not md5 mtime size) /etc/env.d/*
 
 %files wrapper
 %defattr(644,root,root,755)
