@@ -1,6 +1,6 @@
 Summary:	Compiler cache
-Summary(pl):	Przyspieszacz kompilowania
-Summary(pt_BR):	Cache para compiladores C/C++
+Summary(pl.UTF-8):   Przyspieszacz kompilowania
+Summary(pt_BR.UTF-8):   Cache para compiladores C/C++
 Name:		ccache
 Version:	2.4
 Release:	1.4
@@ -22,31 +22,31 @@ C/C++ compilers, using the -E compiler switch and a hash to detect
 when a compilation can be satisfied from cache. This often results in
 a 5 to 10 times speedup in common compilations.
 
-%description -l pl
-ccache dzia³a jako cachuj±cy preprocesor dla kompilatorów C/C++. Przy
-u¿yciu opcji kompilatora -E oraz tablicy haszuj±cej do wykrywania, czy
-do kompilacji wystarczy zawarto¶æ cache. Daje to zazwyczaj
+%description -l pl.UTF-8
+ccache dziaÅ‚a jako cachujÄ…cy preprocesor dla kompilatorÃ³w C/C++. Przy
+uÅ¼yciu opcji kompilatora -E oraz tablicy haszujÄ…cej do wykrywania, czy
+do kompilacji wystarczy zawartoÅ›Ä‡ cache. Daje to zazwyczaj
 przyspieszenie kompilacji 5 do 10 razy.
 
-%description -l pt_BR
-ccache é um cache para compiladores. Ele funciona mantendo um cache de
-pré-processamento para compiladores C/C++ utilizando-se do parâmetro
-- -E e de um hash para detectar quando uma compilação pode ser
+%description -l pt_BR.UTF-8
+ccache Ã© um cache para compiladores. Ele funciona mantendo um cache de
+prÃ©-processamento para compiladores C/C++ utilizando-se do parÃ¢metro
+- -E e de um hash para detectar quando uma compilaÃ§Ã£o pode ser
   reaproveitada de um cache armazenado em disco. O ganho de tempo em
-  compilações comuns pode chegar a uma escala de até 10 vezes em relação
+  compilaÃ§Ãµes comuns pode chegar a uma escala de atÃ© 10 vezes em relaÃ§Ã£o
   ao tempo normal.
 
 %package wrapper
 Summary:	Symlinks for c++/cc/g++/gcc
-Summary(pl):	Dowi±zania symboliczne do c++/cc/g++/gcc
+Summary(pl.UTF-8):   DowiÄ…zania symboliczne do c++/cc/g++/gcc
 Group:		Development/Tools
 Requires:	%{name} = %{version}-%{release}
 
 %description wrapper
 This package contains the softlinks to ccache for each compiler.
 
-%description wrapper -l pl
-Ten pakiet zawiera dowi±zania symboliczne do ccache dla ka¿dego
+%description wrapper -l pl.UTF-8
+Ten pakiet zawiera dowiÄ…zania symboliczne do ccache dla kaÅ¼dego
 kompilatora.
 
 %prep
