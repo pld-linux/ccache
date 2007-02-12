@@ -1,6 +1,6 @@
 Summary:	Compiler cache
-Summary(pl.UTF-8):   Przyspieszacz kompilowania
-Summary(pt_BR.UTF-8):   Cache para compiladores C/C++
+Summary(pl.UTF-8):	Przyspieszacz kompilowania
+Summary(pt_BR.UTF-8):	Cache para compiladores C/C++
 Name:		ccache
 Version:	2.4
 Release:	1.4
@@ -38,7 +38,7 @@ pré-processamento para compiladores C/C++ utilizando-se do parâmetro
 
 %package wrapper
 Summary:	Symlinks for c++/cc/g++/gcc
-Summary(pl.UTF-8):   Dowiązania symboliczne do c++/cc/g++/gcc
+Summary(pl.UTF-8):	Dowiązania symboliczne do c++/cc/g++/gcc
 Group:		Development/Tools
 Requires:	%{name} = %{version}-%{release}
 
