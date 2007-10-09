@@ -1,0 +1,4 @@
+- -nohash_size_mtime.patch: add support to turn off hasing the
+  compiler size and mtime via a environment variable
+  CCACHE_NOHASH_SIZE_MTIME (from FreeBSD cvs)
+- add support for /etc/env.d
