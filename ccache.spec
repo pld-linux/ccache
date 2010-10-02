@@ -3,8 +3,8 @@ Summary(pl.UTF-8):	Przyspieszacz kompilowania
 Summary(pt_BR.UTF-8):	Cache para compiladores C/C++
 Name:		ccache
 Version:	3.1
-Release:	1
-License:	GPL
+Release:	2
+License:	GPL v3
 Group:		Development/Tools
 Source0:	http://samba.org/ftp/ccache/%{name}-%{version}.tar.bz2
 # Source0-md5:	7961852e1e36f11559039c32142f58df
