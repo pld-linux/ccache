@@ -2,16 +2,14 @@ Summary:	Compiler cache
 Summary(pl.UTF-8):	Przyspieszacz kompilowania
 Summary(pt_BR.UTF-8):	Cache para compiladores C/C++
 Name:		ccache
-Version:	2.4
-Release:	2
+Version:	3.1
+Release:	1
 License:	GPL
 Group:		Development/Tools
-Source0:	http://ccache.samba.org/ftp/ccache/%{name}-%{version}.tar.gz
-# Source0-md5:	73c1ed1e767c1752dd0f548ec1e66ce7
+Source0:	http://samba.org/ftp/ccache/%{name}-%{version}.tar.bz2
+# Source0-md5:	7961852e1e36f11559039c32142f58df
 Patch0:		%{name}-nohash_size_mtime.patch
-Patch1:		%{name}-utimes.patch
 URL:		http://ccache.samba.org/
-BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -52,12 +50,9 @@ kompilatora.
 
 %prep
 %setup -q
-%patch0 -p0
-%patch1 -p1
+%patch0 -p1
 
 %build
-%{__aclocal}
-%{__autoconf}
 cp -f /usr/share/automake/config.* .
 %configure
 
@@ -91,7 +86,7 @@ rm -fr $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README
+%doc AUTHORS.txt MANUAL.txt NEWS.txt README.txt
 %attr(755,root,root) %{_bindir}/ccache
 %{_mandir}/man1/ccache*
 %config(noreplace,missingok) %verify(not md5 mtime size) /etc/env.d/*
