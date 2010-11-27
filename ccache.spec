@@ -2,12 +2,12 @@ Summary:	Compiler cache
 Summary(pl.UTF-8):	Przyspieszacz kompilowania
 Summary(pt_BR.UTF-8):	Cache para compiladores C/C++
 Name:		ccache
-Version:	3.1.1
+Version:	3.1.2
 Release:	1
 License:	GPL v3
 Group:		Development/Tools
 Source0:	http://samba.org/ftp/ccache/%{name}-%{version}.tar.bz2
-# Source0-md5:	7dbd668c79d78c0b32c13214b2b35b70
+# Source0-md5:	213e4271c10133092c094ea371c409bb
 Patch0:		%{name}-nohash_size_mtime.patch
 URL:		http://ccache.samba.org/
 BuildRequires:	automake
