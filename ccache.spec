@@ -82,7 +82,7 @@ echo 'export PATH=%{_libdir}:$PATH' > \
 	$RPM_BUILD_ROOT/etc/profile.d/%{name}.sh
 
 %clean
-rm -fr $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
