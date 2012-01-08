@@ -1,15 +1,15 @@
 --- ccache-3.1/ccache.c~	2010-09-16 19:01:09.000000000 +0200
 +++ ccache-3.1/ccache.c	2010-10-02 18:16:57.670019849 +0200
 @@ -814,8 +814,10 @@
- 		hash_file(hash, args->argv[0]);
+ 		/* Do nothing. */
  	} else if (str_eq(compilercheck, "mtime")) {
  		hash_delimiter(hash, "cc_mtime");
--		hash_int(hash, st.st_size);
--		hash_int(hash, st.st_mtime);
+-		hash_int(hash, st->st_size);
+-		hash_int(hash, st->st_mtime);
 +		if (!getenv("CCACHE_NOHASH_SIZE_MTIME")) {
-+			hash_int(hash, st.st_size);
-+			hash_int(hash, st.st_mtime);
++			hash_int(hash, st->st_size);
++			hash_int(hash, st->st_mtime);
 +		}
- 	} else { /* command string */
- 		if (!hash_multicommand_output(hash, compilercheck, orig_args->argv[0])) {
- 			fatal("Failure running compiler check command: %s", compilercheck);
+ 	} else if (str_eq(compilercheck, "content") || !allow_command) {
+ 		hash_delimiter(hash, "cc_content");
+ 		hash_file(hash, path);
