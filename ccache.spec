@@ -2,12 +2,12 @@ Summary:	Compiler cache
 Summary(pl.UTF-8):	Przyspieszacz kompilowania
 Summary(pt_BR.UTF-8):	Cache para compiladores C/C++
 Name:		ccache
-Version:	3.1.7
+Version:	3.1.8
 Release:	1
 License:	GPL v3
 Group:		Development/Tools
 Source0:	http://samba.org/ftp/ccache/%{name}-%{version}.tar.bz2
-# Source0-md5:	82257745eac54826527946e9e3d046f4
+# Source0-md5:	0e0f25fb342dcb1196d9c2986a7323cf
 Patch0:		%{name}-nohash_size_mtime.patch
 URL:		http://ccache.samba.org/
 BuildRequires:	automake
@@ -88,8 +88,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS.txt MANUAL.txt NEWS.txt README.txt
 %attr(755,root,root) %{_bindir}/ccache
-%{_mandir}/man1/ccache*
-%config(noreplace,missingok) %verify(not md5 mtime size) /etc/env.d/*
+%{_mandir}/man1/ccache.1.*
+%config(noreplace,missingok) %verify(not md5 mtime size) /etc/env.d/CCACHE_*
 
 %files wrapper
 %defattr(644,root,root,755)
