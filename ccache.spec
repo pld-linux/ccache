@@ -15,7 +15,6 @@ BuildRequires:	zlib-devel >= 1.2.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_libdir		%{_prefix}/%{_lib}/%{name}
-%define		specflags	-D_FILE_OFFSET_BITS=64
 
 %description
 ccache is a compiler cache. It acts as a caching pre-processor to
@@ -59,6 +58,7 @@ kompilatora.
 
 %build
 cp -f /usr/share/automake/config.* .
+CPPFLAGS="%{rpmcppflags} -D_FILE_OFFSET_BITS=64"
 %configure
 
 %{__make}
