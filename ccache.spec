@@ -11,6 +11,7 @@ Source0:	http://samba.org/ftp/ccache/%{name}-%{version}.tar.bz2
 Patch0:		%{name}-nohash_size_mtime.patch
 URL:		http://ccache.samba.org/
 BuildRequires:	automake
+BuildRequires:	zlib-devel >= 1.2.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_libdir		%{_prefix}/%{_lib}/%{name}
@@ -52,6 +53,9 @@ kompilatora.
 %prep
 %setup -q
 %patch0 -p1
+
+# Make sure system zlib is used
+%{__rm} -r zlib
 
 %build
 cp -f /usr/share/automake/config.* .
