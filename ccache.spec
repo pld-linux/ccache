@@ -3,7 +3,7 @@ Summary(pl.UTF-8):	Przyspieszacz kompilowania
 Summary(pt_BR.UTF-8):	Cache para compiladores C/C++
 Name:		ccache
 Version:	3.1.8
-Release:	1
+Release:	2
 License:	GPL v3
 Group:		Development/Tools
 Source0:	http://samba.org/ftp/ccache/%{name}-%{version}.tar.bz2
@@ -14,6 +14,7 @@ BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_libdir		%{_prefix}/%{_lib}/%{name}
+%define		specflags	-D_FILE_OFFSET_BITS=64
 
 %description
 ccache is a compiler cache. It acts as a caching pre-processor to
