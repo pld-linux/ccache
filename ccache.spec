@@ -2,15 +2,17 @@ Summary:	Compiler cache
 Summary(pl.UTF-8):	Przyspieszacz kompilowania
 Summary(pt_BR.UTF-8):	Cache para compiladores C/C++
 Name:		ccache
-Version:	3.1.9
+Version:	3.1.10
 Release:	1
 License:	GPL v3
 Group:		Development/Tools
-Source0:	http://samba.org/ftp/ccache/%{name}-%{version}.tar.bz2
-# Source0-md5:	65f48376a91d3651d6527ca568858be8
+Source0:	http://www.samba.org/ftp/ccache/%{name}-%{version}.tar.xz
+# Source0-md5:	20cd43818f84e3208fb4859e9679060e
 Patch0:		%{name}-nohash_size_mtime.patch
 URL:		http://ccache.samba.org/
 BuildRequires:	automake
+BuildRequires:	tar >= 1:1.22
+BuildRequires:	xz
 BuildRequires:	zlib-devel >= 1.2.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -65,7 +67,6 @@ CPPFLAGS="%{rpmcppflags} -D_FILE_OFFSET_BITS=64"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT/etc/env.d
 
 %{__make} install \
@@ -100,4 +101,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) /etc/profile.d/%{name}.sh
 %dir %{_libdir}
-%attr(755,root,root) %{_libdir}/*
+%attr(755,root,root) %{_libdir}/c++
+%attr(755,root,root) %{_libdir}/cc
+%attr(755,root,root) %{_libdir}/g++
+%attr(755,root,root) %{_libdir}/gcc
+%attr(755,root,root) %{_libdir}/%{_target_cpu}-pld-linux-g++
+%attr(755,root,root) %{_libdir}/%{_target_cpu}-pld-linux-gcc
