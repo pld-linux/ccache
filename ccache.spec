@@ -1,5 +1,5 @@
 Summary:	Compiler cache
-Summary(pl.UTF-8):	Przyspieszacz kompilowania
+Summary(pl.UTF-8):	Pamięć podręczna dla kompilatora
 Summary(pt_BR.UTF-8):	Cache para compiladores C/C++
 Name:		ccache
 Version:	3.1.10
@@ -25,10 +25,11 @@ when a compilation can be satisfied from cache. This often results in
 a 5 to 10 times speedup in common compilations.
 
 %description -l pl.UTF-8
-ccache działa jako cachujący preprocesor dla kompilatorów C/C++. Przy
-użyciu opcji kompilatora -E oraz tablicy haszującej do wykrywania, czy
-do kompilacji wystarczy zawartość cache. Daje to zazwyczaj
-przyspieszenie kompilacji 5 do 10 razy.
+ccache to pamięć podręczna dla kompilatora - działa jako cachujący
+preprocesor dla kompilatorów C/C++, wykorzystujący opcję kompilatora
+-E oraz tablicę haszującą do wykrywania, czy do kompilacji wystarczy
+zawartość pamięci podręcznej. Daje to zazwyczaj przyspieszenie
+kompilacji 5 do 10 razy.
 
 %description -l pt_BR.UTF-8
 ccache é um cache para compiladores. Ele funciona mantendo um cache de
