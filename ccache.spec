@@ -2,12 +2,12 @@ Summary:	Compiler cache
 Summary(pl.UTF-8):	Pamięć podręczna dla kompilatora
 Summary(pt_BR.UTF-8):	Cache para compiladores C/C++
 Name:		ccache
-Version:	3.2.4
+Version:	3.2.5
 Release:	1
 License:	GPL v3
 Group:		Development/Tools
 Source0:	https://www.samba.org/ftp/ccache/%{name}-%{version}.tar.xz
-# Source0-md5:	1781eec25073765828b874004d944c53
+# Source0-md5:	270c9ad0631c6e34f5fa84f0d9385f95
 URL:		http://ccache.samba.org/
 BuildRequires:	automake
 BuildRequires:	tar >= 1:1.22
