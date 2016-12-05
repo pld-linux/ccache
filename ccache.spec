@@ -2,12 +2,12 @@ Summary:	Compiler cache
 Summary(pl.UTF-8):	Pamięć podręczna dla kompilatora
 Summary(pt_BR.UTF-8):	Cache para compiladores C/C++
 Name:		ccache
-Version:	3.2.7
+Version:	3.3.3
 Release:	1
 License:	GPL v3
 Group:		Development/Tools
 Source0:	https://www.samba.org/ftp/ccache/%{name}-%{version}.tar.xz
-# Source0-md5:	d51bff83f656f6a3a58c7e9117d6d8fc
+# Source0-md5:	6918b36301a0b8ffdc96549f609a4ebc
 URL:		http://ccache.samba.org/
 BuildRequires:	automake
 BuildRequires:	tar >= 1:1.22
@@ -71,14 +71,6 @@ install -d $RPM_BUILD_ROOT/etc/env.d
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-for X in CCACHE_DIR CCACHE_TEMPDIR CCACHE_LOGFILE CCACHE_PATH CCACHE_CC CCACHE_PREFIX \
-	CCACHE_DISABLE CCACHE_READONLY CCACHE_CPP2 CCACHE_NOSTATS CCACHE_NLEVELS \
-	CCACHE_HARDLINK CCACHE_RECACHE CCACHE_UMASK CCACHE_HASHDIR CCACHE_UNIFY \
-	CCACHE_EXTENSION CCACHE_NOHASH_SIZE_MTIME
-do
-	echo "#${X}=\"\"" > $RPM_BUILD_ROOT/etc/env.d/${X}
-done
-
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir},/etc/profile.d}
 for cc in cc c++ g++ gcc %{_target_cpu}-pld-linux-gcc %{_target_cpu}-pld-linux-g++; do
 	ln -s ../../bin/%{name} $RPM_BUILD_ROOT%{_libdir}/$cc
@@ -94,7 +86,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS.txt MANUAL.txt NEWS.txt README.txt
 %attr(755,root,root) %{_bindir}/ccache
 %{_mandir}/man1/ccache.1.*
-%config(noreplace,missingok) %verify(not md5 mtime size) /etc/env.d/CCACHE_*
 
 %files wrapper
 %defattr(644,root,root,755)
