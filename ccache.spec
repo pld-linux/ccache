@@ -2,20 +2,21 @@ Summary:	Compiler cache
 Summary(pl.UTF-8):	Pamięć podręczna dla kompilatora
 Summary(pt_BR.UTF-8):	Cache para compiladores C/C++
 Name:		ccache
-Version:	3.3.4
+Version:	3.4.2
 Release:	1
-License:	GPL v3
+License:	GPL v3+
 Group:		Development/Tools
 Source0:	https://www.samba.org/ftp/ccache/%{name}-%{version}.tar.xz
-# Source0-md5:	95ab3c56284129cc2a32460c23069516
+# Source0-md5:	9e048f88f3897125864f9a5e1abfb72d
 URL:		http://ccache.samba.org/
 BuildRequires:	automake
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRequires:	zlib-devel >= 1.2.3
+Requires:	zlib >= 1.2.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_libdir		%{_prefix}/%{_lib}/%{name}
+%define		pkglibexecdir	%{_libexecdir}/%{name}
 
 %description
 ccache is a compiler cache. It acts as a caching pre-processor to
@@ -55,7 +56,7 @@ kompilatora.
 %setup -q
 
 # Make sure system zlib is used
-%{__rm} -r zlib
+%{__rm} -r src/zlib
 
 %build
 cp -f /usr/share/automake/config.* .
@@ -71,11 +72,11 @@ install -d $RPM_BUILD_ROOT/etc/env.d
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir},/etc/profile.d}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{pkglibexecdir},/etc/profile.d}
 for cc in cc c++ g++ gcc %{_target_cpu}-pld-linux-gcc %{_target_cpu}-pld-linux-g++; do
-	ln -s ../../bin/%{name} $RPM_BUILD_ROOT%{_libdir}/$cc
+	ln -s ../../bin/%{name} $RPM_BUILD_ROOT%{pkglibexecdir}/$cc
 done
-echo 'export PATH=%{_libdir}:$PATH' > \
+echo 'export PATH=%{pkglibexecdir}:$PATH' > \
 	$RPM_BUILD_ROOT/etc/profile.d/%{name}.sh
 
 %clean
@@ -83,17 +84,17 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS.* LICENSE.* MANUAL.* NEWS.* README.md
+%doc LICENSE.* README.md doc/{AUTHORS.*,MANUAL.*,NEWS.*}
 %attr(755,root,root) %{_bindir}/ccache
-%{_mandir}/man1/ccache.1.*
+%{_mandir}/man1/ccache.1*
 
 %files wrapper
 %defattr(644,root,root,755)
-%attr(755,root,root) /etc/profile.d/%{name}.sh
-%dir %{_libdir}
-%attr(755,root,root) %{_libdir}/c++
-%attr(755,root,root) %{_libdir}/cc
-%attr(755,root,root) %{_libdir}/g++
-%attr(755,root,root) %{_libdir}/gcc
-%attr(755,root,root) %{_libdir}/%{_target_cpu}-pld-linux-g++
-%attr(755,root,root) %{_libdir}/%{_target_cpu}-pld-linux-gcc
+/etc/profile.d/%{name}.sh
+%dir %{pkglibexecdir}
+%attr(755,root,root) %{pkglibexecdir}/c++
+%attr(755,root,root) %{pkglibexecdir}/cc
+%attr(755,root,root) %{pkglibexecdir}/g++
+%attr(755,root,root) %{pkglibexecdir}/gcc
+%attr(755,root,root) %{pkglibexecdir}/%{_target_cpu}-pld-linux-g++
+%attr(755,root,root) %{pkglibexecdir}/%{_target_cpu}-pld-linux-gcc
