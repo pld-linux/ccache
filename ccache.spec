@@ -64,14 +64,16 @@ CPPFLAGS="%{rpmcppflags} -D_FILE_OFFSET_BITS=64"
 %configure \
 	--without-bundled-zlib
 
-%{__make}
+%{__make} \
+	V=1
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/env.d
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	V=1
 
 install -d $RPM_BUILD_ROOT{%{_bindir},%{pkglibexecdir},/etc/profile.d}
 for cc in cc c++ g++ gcc %{_target_cpu}-pld-linux-gcc %{_target_cpu}-pld-linux-g++; do
