@@ -3,7 +3,7 @@ Summary(pl.UTF-8):	Pamięć podręczna dla kompilatora
 Summary(pt_BR.UTF-8):	Cache para compiladores C/C++
 Name:		ccache
 Version:	3.6
-Release:	1
+Release:	2
 License:	GPL v3+
 Group:		Development/Tools
 Source0:	https://www.samba.org/ftp/ccache/%{name}-%{version}.tar.xz
@@ -76,7 +76,12 @@ install -d $RPM_BUILD_ROOT/etc/env.d
 	V=1
 
 install -d $RPM_BUILD_ROOT{%{_bindir},%{pkglibexecdir},/etc/profile.d}
-for cc in cc c++ g++ gcc %{_target_cpu}-pld-linux-gcc %{_target_cpu}-pld-linux-g++; do
+%ifarch x32
+target=x86_64-%{_target_vendor}-%{_target_os}-gnux32
+%else
+target=%{_target_cpu}-%{_target_vendor}-%{_target_os}
+%endif
+for cc in cc c++ g++ gcc $target-gcc $target-g++; do
 	ln -s ../../bin/%{name} $RPM_BUILD_ROOT%{pkglibexecdir}/$cc
 done
 echo 'export PATH=%{pkglibexecdir}:$PATH' > \
@@ -99,5 +104,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{pkglibexecdir}/cc
 %attr(755,root,root) %{pkglibexecdir}/g++
 %attr(755,root,root) %{pkglibexecdir}/gcc
-%attr(755,root,root) %{pkglibexecdir}/%{_target_cpu}-pld-linux-g++
-%attr(755,root,root) %{pkglibexecdir}/%{_target_cpu}-pld-linux-gcc
+%attr(755,root,root) %{pkglibexecdir}/*-g++
+%attr(755,root,root) %{pkglibexecdir}/*-gcc
