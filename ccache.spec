@@ -2,18 +2,20 @@ Summary:	Compiler cache
 Summary(pl.UTF-8):	Pamięć podręczna dla kompilatora
 Summary(pt_BR.UTF-8):	Cache para compiladores C/C++
 Name:		ccache
-Version:	3.6
-Release:	2
+Version:	4.2.1
+Release:	1
 License:	GPL v3+
 Group:		Development/Tools
-Source0:	https://www.samba.org/ftp/ccache/%{name}-%{version}.tar.xz
-# Source0-md5:	6a202aeeeea417272f3d6ed66026533b
-URL:		http://ccache.samba.org/
-BuildRequires:	automake
+Source0:	https://github.com/ccache/ccache/releases/download/v%{version}/%{name}-%{version}.tar.xz
+# Source0-md5:	0f95a4b491a4dcd904c8235ee7c660cd
+URL:		https://ccache.dev/
+BuildRequires:	cmake >= 3.4.3
+BuildRequires:	libstdc++-devel >= 6:4.8.1
+BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-BuildRequires:	zlib-devel >= 1.2.3
-Requires:	zlib >= 1.2.3
+BuildRequires:	zstd-devel >= 1.1.2
+Requires:	zstd >= 1.1.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		pkglibexecdir	%{_libexecdir}/%{name}
@@ -55,25 +57,17 @@ kompilatora.
 %prep
 %setup -q
 
-# Make sure system zlib is used
-%{__rm} -r src/zlib
-
 %build
-cp -f /usr/share/automake/config.* .
-CPPFLAGS="%{rpmcppflags} -D_FILE_OFFSET_BITS=64"
-%configure \
-	--without-bundled-zlib
+%cmake -B build
 
-%{__make} \
-	V=1
+%{__make} -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/env.d
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	V=1
+%{__make} -C build install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT{%{_bindir},%{pkglibexecdir},/etc/profile.d}
 %ifarch x32
