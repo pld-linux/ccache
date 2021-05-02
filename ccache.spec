@@ -59,6 +59,7 @@ kompilatora.
 
 %build
 %cmake -B build \
+	-DUSE_CCACHE=OFF \
 	-DUSE_FASTER_LINKER=OFF
 
 %{__make} -C build
