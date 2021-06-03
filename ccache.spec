@@ -10,6 +10,9 @@ Source0:	https://github.com/ccache/ccache/releases/download/v%{version}/%{name}-
 # Source0-md5:	0f95a4b491a4dcd904c8235ee7c660cd
 URL:		https://ccache.dev/
 BuildRequires:	cmake >= 3.4.3
+%ifarch %{arm}
+BuildRequires:	libatomic-devel
+%endif
 BuildRequires:	libstdc++-devel >= 6:4.8.1
 BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	tar >= 1:1.22
