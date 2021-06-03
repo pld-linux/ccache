@@ -24,6 +24,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		pkglibexecdir	%{_libexecdir}/%{name}
 
+%ifarch %{arm}
+%define		archcflags	-DXXH_FORCE_MEMORY_ACCESS=1
+%endif
+
 %description
 ccache is a compiler cache. It acts as a caching pre-processor to
 C/C++ compilers, using the -E compiler switch and a hash to detect
@@ -62,6 +66,7 @@ kompilatora.
 %setup -q
 
 %build
+export CFLAGS="%{rpmcflags} %{?archcflags}"
 %cmake -B build \
 	-DUSE_CCACHE=OFF \
 	-DUSE_FASTER_LINKER=OFF
