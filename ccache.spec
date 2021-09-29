@@ -1,24 +1,31 @@
+#
+# Conditional build:
+%bcond_without	redis		# Redis secondary storage support
+
 Summary:	Compiler cache
 Summary(pl.UTF-8):	Pamięć podręczna dla kompilatora
 Summary(pt_BR.UTF-8):	Cache para compiladores C/C++
 Name:		ccache
-Version:	4.2.1
-Release:	2
+Version:	4.4.2
+Release:	1
 License:	GPL v3+
 Group:		Development/Tools
 Source0:	https://github.com/ccache/ccache/releases/download/v%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	0f95a4b491a4dcd904c8235ee7c660cd
+# Source0-md5:	a38921ab61002b245b9f08235c04009c
 URL:		https://ccache.dev/
 BuildRequires:	asciidoc
-BuildRequires:	cmake >= 3.4.3
+BuildRequires:	cmake >= 3.10
+%{?with_redis:BuildRequires:	hiredis-devel >= 0.13.3}
 %ifarch %{arm}
 BuildRequires:	libatomic-devel
 %endif
-BuildRequires:	libstdc++-devel >= 6:4.8.1
+BuildRequires:	libstdc++-devel >= 6:5
 BuildRequires:	rpmbuild(macros) >= 1.605
+BuildRequires:	ruby-asciidoctor
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRequires:	zstd-devel >= 1.1.2
+%{?with_redis:Requires:	hiredis >= 0.13.3}
 Requires:	zstd >= 1.1.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
