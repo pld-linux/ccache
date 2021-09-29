@@ -20,7 +20,7 @@ BuildRequires:	cmake >= 3.10
 BuildRequires:	libatomic-devel
 %endif
 BuildRequires:	libstdc++-devel >= 6:5
-BuildRequires:	rpmbuild(macros) >= 1.605
+BuildRequires:	rpmbuild(macros) >= 1.742
 BuildRequires:	ruby-asciidoctor
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
@@ -76,7 +76,8 @@ kompilatora.
 export CFLAGS="%{rpmcflags} %{?archcflags}"
 %cmake -B build \
 	-DUSE_CCACHE=OFF \
-	-DUSE_FASTER_LINKER=OFF
+	-DUSE_FASTER_LINKER=OFF \
+	%{cmake_on_off redis REDIS_STORAGE_BACKEND}
 
 %{__make} -C build
 
