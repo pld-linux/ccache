@@ -16,11 +16,11 @@ URL:		https://ccache.dev/
 BuildRequires:	asciidoc
 BuildRequires:	cmake >= 3.15
 %{?with_redis:BuildRequires:	hiredis-devel >= 0.13.3}
-%ifarch %{arm}
+%ifnarch %arch_with_atomics64
 BuildRequires:	libatomic-devel
 %endif
 BuildRequires:	libstdc++-devel >= 6:5
-BuildRequires:	rpmbuild(macros) >= 1.742
+BuildRequires:	rpmbuild(macros) >= 2.025
 BuildRequires:	ruby-asciidoctor
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
