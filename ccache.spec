@@ -6,16 +6,18 @@ Summary:	Compiler cache
 Summary(pl.UTF-8):	Pamięć podręczna dla kompilatora
 Summary(pt_BR.UTF-8):	Cache para compiladores C/C++
 Name:		ccache
-Version:	4.9.1
+Version:	4.10
 Release:	1
 License:	GPL v3+
 Group:		Development/Tools
 Source0:	https://github.com/ccache/ccache/releases/download/v%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	a574ea87aa223c01d74b511a5487ed15
+# Source0-md5:	f61ae4be99ee693fa62bf7bbd794f6a0
 URL:		https://ccache.dev/
 BuildRequires:	asciidoc
 BuildRequires:	cmake >= 3.15
+BuildRequires:	cpp-httplib-devel >= 0.10.6
 %{?with_redis:BuildRequires:	hiredis-devel >= 0.13.3}
+BuildRequires:	libfmt-devel >= 8.0.0
 %ifnarch %arch_with_atomics64
 BuildRequires:	libatomic-devel
 %endif
@@ -23,10 +25,13 @@ BuildRequires:	libstdc++-devel >= 6:5
 BuildRequires:	rpmbuild(macros) >= 2.025
 BuildRequires:	ruby-asciidoctor
 BuildRequires:	tar >= 1:1.22
+BuildRequires:	xxHash-devel >= 0.8.0
 BuildRequires:	xz
-BuildRequires:	zstd-devel >= 1.1.2
+BuildRequires:	zstd-devel >= 1.3.4
 %{?with_redis:Requires:	hiredis >= 0.13.3}
-Requires:	zstd >= 1.1.2
+Requires:	libfmt >= 8.0.0
+Requires:	xxHash >= 0.8.0
+Requires:	zstd >= 1.3.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		pkglibexecdir	%{_libexecdir}/%{name}
@@ -75,6 +80,9 @@ kompilatora.
 %build
 export CFLAGS="%{rpmcflags} %{?archcflags}"
 %cmake -B build \
+	-DDEPS=LOCAL \
+	-DDEP_CPPHTTPLIB=SYSTEM \
+	-DENABLE_TESTING=OFF \
 	-DUSE_CCACHE=OFF \
 	-DUSE_FASTER_LINKER=OFF \
 	%{cmake_on_off redis REDIS_STORAGE_BACKEND}
