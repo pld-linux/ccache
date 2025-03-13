@@ -6,12 +6,12 @@ Summary:	Compiler cache
 Summary(pl.UTF-8):	Pamięć podręczna dla kompilatora
 Summary(pt_BR.UTF-8):	Cache para compiladores C/C++
 Name:		ccache
-Version:	4.10.2
+Version:	4.11
 Release:	1
 License:	GPL v3+
 Group:		Development/Tools
 Source0:	https://github.com/ccache/ccache/releases/download/v%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	8942d66ac92a74a4a412f4948253a4c5
+# Source0-md5:	3391d7f858c60d3e72acfbf283d45203
 URL:		https://ccache.dev/
 BuildRequires:	asciidoc
 BuildRequires:	cmake >= 3.15
