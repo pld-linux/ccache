@@ -6,15 +6,15 @@ Summary:	Compiler cache
 Summary(pl.UTF-8):	Pamięć podręczna dla kompilatora
 Summary(pt_BR.UTF-8):	Cache para compiladores C/C++
 Name:		ccache
-Version:	4.11.3
+Version:	4.12
 Release:	1
 License:	GPL v3+
 Group:		Development/Tools
 Source0:	https://github.com/ccache/ccache/releases/download/v%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	95eea766b053e33601f8e69199b51de0
+# Source0-md5:	f0be239be99873b736899885496808b2
 URL:		https://ccache.dev/
 BuildRequires:	asciidoc
-BuildRequires:	cmake >= 3.15
+BuildRequires:	cmake >= 3.18
 BuildRequires:	cpp-httplib-devel >= 0.10.6
 %{?with_redis:BuildRequires:	hiredis-devel >= 0.13.3}
 BuildRequires:	libfmt-devel >= 8.0.0
@@ -22,6 +22,7 @@ BuildRequires:	libfmt-devel >= 8.0.0
 BuildRequires:	libatomic-devel
 %endif
 BuildRequires:	libstdc++-devel >= 6:5
+BuildRequires:	perl-base
 BuildRequires:	rpmbuild(macros) >= 2.025
 BuildRequires:	ruby-asciidoctor
 BuildRequires:	tar >= 1:1.22
