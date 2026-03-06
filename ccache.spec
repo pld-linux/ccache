@@ -1,17 +1,18 @@
 #
 # Conditional build:
+%bcond_without	pandoc		# markdown documentation (requires pandoc)
 %bcond_without	redis		# Redis secondary storage support
 
 Summary:	Compiler cache
 Summary(pl.UTF-8):	Pamięć podręczna dla kompilatora
 Summary(pt_BR.UTF-8):	Cache para compiladores C/C++
 Name:		ccache
-Version:	4.12.3
+Version:	4.13
 Release:	1
 License:	GPL v3+
 Group:		Development/Tools
 Source0:	https://github.com/ccache/ccache/releases/download/v%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	a12a3d8ae2b4d84d37e89ee280374f3d
+# Source0-md5:	c2ea959fe3fe57be807867f530fed267
 URL:		https://ccache.dev/
 BuildRequires:	asciidoc
 BuildRequires:	cmake >= 3.18
@@ -21,7 +22,8 @@ BuildRequires:	libfmt-devel >= 8.0.0
 %ifnarch %arch_with_atomics64
 BuildRequires:	libatomic-devel
 %endif
-BuildRequires:	libstdc++-devel >= 6:5
+BuildRequires:	libstdc++-devel >= 6:10
+%{?with_pandoc:BuildRequires:	pandoc}
 BuildRequires:	perl-base
 BuildRequires:	rpmbuild(macros) >= 2.025
 BuildRequires:	ruby-asciidoctor
@@ -109,12 +111,14 @@ done
 echo 'export PATH=%{pkglibexecdir}:$PATH' > \
 	$RPM_BUILD_ROOT/etc/profile.d/%{name}.sh
 
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc LICENSE.* README.md doc/{AUTHORS.*,MANUAL.*,NEWS.*}
+%doc LICENSE.* README.md build/doc/{AUTHORS.*,MANUAL.*,NEWS.*}
 %attr(755,root,root) %{_bindir}/ccache
 %{_mandir}/man1/ccache.1*
 
